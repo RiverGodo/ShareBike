@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Form,Select,Card,DatePicker,Button, Table, message,Modal} from 'antd'
 import "./index.scss"
-import axios from "../../../axios/axios.js"
+import axios from "../../axios/axios.js"
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -87,6 +87,15 @@ class OrderDemo extends Component {
               this.getTable()
             }
         })
+    }
+
+    handleDetail = ()=>{
+        let item = this.state.selectedItem[0]
+        if(item){
+            window.open(`/common/order/detail/${item.id}`,'_blank')
+        }else{
+            message.info('请选择一项订单进行操作')
+        }
     }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -249,7 +258,7 @@ class OrderDemo extends Component {
             </div>
         </Card>
         <Card style={{marginTop:'-1px'}}>
-            <Button type="primary" className='mgr-20'>订单详情</Button>
+            <Button type="primary" className='mgr-20' onClick={this.handleDetail}>订单详情</Button>
             <Button onClick = {this.handleDone}>结束订单</Button>
         </Card>
         <Card>

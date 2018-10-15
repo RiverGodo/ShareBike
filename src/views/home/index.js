@@ -6,7 +6,7 @@ class Home extends Component {
   render() {
     return (
     <div>
-      <h1>有丶东西</h1>
+      <h1 className="dian">有丶东西</h1>
           <div className='home' >
      
      <div className="img-wrap ">

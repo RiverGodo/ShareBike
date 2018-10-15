@@ -3,8 +3,9 @@ import {Link} from 'react-router-dom'
 import './index.less'
 import {formatDate} from '../../utils'
 import axios from 'axios'
+import { connect } from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
 
 
     state={
@@ -51,7 +52,7 @@ export default class Header extends Component {
         </div>
         <div className="weather-wrap clearfix">
           <div className="breadcrumb fll">
-            首页
+              {this.props.menuText.menuItemText}
           </div>
           <div className='weather flr clearfix'>
                 <div className="date fll">
@@ -66,3 +67,11 @@ export default class Header extends Component {
     )
   }
 }
+
+//接收两个参数，一个是mapStateToProps,另一个参数叫mapActionToProps
+//这两个参数都应该是个函数
+export default connect(
+  (state) => ({
+    menuText: state
+  })
+)(Header)

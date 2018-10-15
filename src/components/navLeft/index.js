@@ -2,17 +2,25 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import {Menu} from 'antd'
 import './index.less'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import actionCreator from '../../redux/actionCreator'
 
 
 const SubMenu = Menu.SubMenu;
 const MenuItem = Menu.Item;
 
-export default class NavLeft extends Component {
+ class NavLeft extends Component {
+
+    clickMenuItem = ({ item, key, keyPath }) =>{ 
+        const text = item.props.children.props.children 
+        this.props.action.changeMenuItem(text)
+    }
    
   render() {
     return (
         <div className='nav-left'>
-            <Menu mode="vertical" theme='dark'>
+            <Menu mode="vertical" theme='dark' onClick={this.clickMenuItem}>
                 <MenuItem key='/首页'>
                     <Link to='/admin/home'>首页</Link>
                 </MenuItem>
@@ -33,3 +41,11 @@ export default class NavLeft extends Component {
     )
   }
 }
+
+//传第二个参数 mapActionToProps
+export default connect(
+    null,
+    (dispatch) => ({
+        action: bindActionCreators(actionCreator,dispatch)
+    })
+)(NavLeft)
